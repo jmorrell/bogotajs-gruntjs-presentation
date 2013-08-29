@@ -1,0 +1,60 @@
+.slide {
+    background: #fff;
+}
+
+/* Hide the slide numbers */
+.slide:after {
+    display: none;
+}
+
+/* Hide the line numbers for code snippets */
+.slide pre code:before {
+    display: none;
+}
+
+/* Give us an sub-header that fits with the theme */
+.slide h3 {
+    margin: 0 0 17px;
+    color: rgb(87, 87, 87);
+    font: bold 30px/1 "PT Sans Narrow",sans-serif;
+}
+
+/* 
+ * Center an element in the middle of the page. Stolen
+ * shamelessly from the Mozilla slide deck template. 
+ */
+.middle {
+	position:absolute;
+	top:50%;
+	left:50%;
+	-webkit-transform:translate(-50%, -50%);
+	-moz-transform:translate(-50%, -50%);
+	-ms-transform:translate(-50%, -50%);
+	-o-transform:translate(-50%, -50%);
+	transform:translate(-50%, -50%);
+}
+
+.mono {
+    font-family: "PT Mono",monospace;
+    color: #666;
+}
+
+/* Styles for specific slides */
+
+#Viva {
+    background-color: black;
+}
+
+    #Viva img {
+        zoom: 85%;
+    }
+
+#details img {
+  zoom: 80%;
+  float: right;
+  -moz-border-radius: 20px;
+  -webkit-border-radius: 20px;
+  -ms-border-radius: 20px;
+  -o-border-radius: 20px;
+  border-radius: 20px;
+}

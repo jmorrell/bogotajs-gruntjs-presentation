@@ -1,0 +1,285 @@
+<!DOCTYPE HTML>
+<html lang="en">
+<head>
+	<title>An Introduction to Grunt.js</title>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=792, user-scalable=no">
+	<link rel="stylesheet" href="shower/themes/ribbon/styles/screen.css">
+	<link rel="stylesheet" href="css/styles.css">
+</head>
+<body class="list">
+
+	<header class="caption">
+		<h1>An Introduction to Grunt.js</h1>
+		<p><a href="#">Jeremy Morrell</a>, <a href="http://www.vivareal.com.br">VivaReal</a></p>
+	</header>
+
+	<section class="slide" id="Cover"><div>
+		<h2>Grunt.js</h2>
+		<img class="middle" src="pictures/grunt.png" alt="">
+	</div></section>
+
+	<section class="slide"><div>
+		<h2>Who uses?</h2>
+    <ul>
+      <li>LESS / SASS / Stylus</li>
+      <li>jQuery / Underscore / Mustache templates</li>
+      <li>requirejs / browserify / other</li>
+      <li>jshint / jslint</li>
+      <li>jasmine / mocha / qunit</li>
+    </ul>
+	</div></section>
+
+	<section class="slide"><div>
+		<h2>Who uses?</h2>
+    <p>Who uses a build tool for their front-end code?</p>
+	</div></section>
+
+	<section class="slide"><div>
+		<h2>What</h2>
+    <p>Grunt.js is a build tool written in JavaScript built on Node.js.</p>
+    <img src="pictures/node.png" class="middle" alt="node.js logo" />
+	</div></section>
+
+  <section class="slide"><div>
+		<h2>Why</h2>
+    <h3>Used by these folks</h3>
+    <ul>
+      <li>Twitter</li>
+      <li>jQuery</li>
+      <li>jQuery UI</li>
+      <li>Modernizr</li>
+      <li>Adobe</li>
+    </ul>  
+  </div></section>
+
+	<section class="slide"><div>
+		<h2>Why</h2>
+    <ul>
+      <li>Focused on common front-end tasks</li>
+      <li>Configuration is just JavaScript</li>
+      <li>Cross platform - works on OS X / Windows / Linux</li>
+      <li>Leverage the power of <span class="mono">package.json</span> and <span class="mono">npm</span></li>
+    </ul>
+	</div></section>
+
+  <section class="slide"><div>
+		<h2>Why</h2>
+    <p>Installing your project should be as simple as:</p>
+    <pre>
+      <code>$ git clone yourRepo newProject</code>
+      <code>$ cd newProject</code>
+      <code>$ npm install <mark class="comment">// Install all dependencies</mark></code>
+      <code>$ grunt <mark class="comment">      // Concat, minify, run tests, </mark></code>
+      <code><mark class="comment">              // deploy to CDN, etc </mark></code>
+    </pre>
+	</div></section>
+
+  <section class="slide"><div>
+		<h2>Why</h2>
+    <p>Installing your project should be as simple as:</p>
+    <pre>
+      <code>$ git clone yourRepo newProject</code>
+      <code>$ cd newProject</code>
+      <code>$ <mark class="important">npm install</mark> </code>
+      <code>$ grunt</code>
+    </pre>
+  </div></section>
+
+  <!-- show example package.json requirements list -->
+  <section class="slide"><div>
+		<h2>package.json</h2>
+    <pre>
+      <code>"dependencies": {</code>
+      <code>  "grunt": "~0.4.1",</code>
+      <code>  "grunt-contrib-jshint": "~0.1.1",</code>
+      <code>  "grunt-contrib-nodeunit": "~0.1.2",</code>
+      <code>  "grunt-contrib-watch": "~0.2.0",</code>
+      <code>  // ...</code>
+      <code>}</code>
+    </pre>
+  </div></section>
+
+  <!-- Need to explain grunt-cli -->
+  <section class="slide"><div>
+		<h2>Installation</h2>
+    <h3>Old and busted</h3>
+    <pre>
+      <code>$ npm install -g grunt</code>
+    </pre>
+    <h3>New hotness</h3>
+    <pre>
+      <code>$ npm install -g grunt-cli</code>
+      <code>$ npm install grunt <mark class="comment">// In each project</mark></code>
+    </pre>
+	</div></section>
+
+  <section class="slide"><div>
+		<h2>Installation</h2>
+
+    <p>Install the latest version of grunt and save the requirement to <span class="mono">package.json</span></p>
+    <pre>
+      <code>$ npm install grunt --save-dev</code>
+    </pre>
+
+    <span>Grunt is installed to:</span>
+    <pre>
+      <code>./node_modules/grunt/lib/grunt.js</code>
+    </pre>
+
+	</div></section>
+
+
+	<section class="slide shout"><div>
+    <h2>Grunt Basics<br> Demo</h2>
+	</div></section>
+
+  <!-- 
+    Go over the hello world grunt config demos.
+  -->
+
+	<section class="slide"><div>
+		<h2>Concepts: Multi-task</h2>
+
+    <pre>
+      <code>"task": {</code>
+      <code>  "options": { <mark class="comment">/* options for all tasks */</mark> }</code>
+      <code>  "foo": {",</code>
+      <code>    "options": { <mark class="comment">/* override the global options */</mark> }</code>
+      <code>  "},"</code>
+      <code>  "bar": { <mark class="comment">/* other task */</mark> }</code>
+      <code>}</code>
+      <code>grunt.registerTask('default', [ 'task:foo' , 'task:bar' ]);</code>
+    </pre>
+
+	</div></section>
+
+
+  <section class="slide"><div>
+		<h2>Concepts: File lists</h2>
+
+    <pre>
+      <code>files: ['src/aa.js', 'src/aaa.js']</code>
+    </pre>
+
+    <pre>
+      <code>src: ['src/bb.js', 'src/bbb.js'],</code>
+      <code>dest: 'dest/b.js',</code>
+    </pre>
+    
+    <pre>
+      <code>files: {</code>
+      <code>  'dest/a.js': ['src/aa.js', 'src/aaa.js'],</code>
+      <code>  'dest/a1.js': ['src/aa1.js', 'src/aaa1.js'],</code>
+      <code>}</code>
+    </pre>
+	</div></section>
+
+  <section class="slide"><div>
+		<h2>Concepts: Globbing</h2>
+
+    <span>Match all files in directory <span class="mono">foo</span></span>
+    <pre>
+      <code>'foo/*'</code>
+    </pre>
+
+    <span>Match all javascript files in any subdirectory of <span class="mono">foo<span></span>
+    <pre>
+      <code>'foo/**/*.js'</code>
+    </pre>
+
+    <pre>
+      <code>grunt.file.expand(['styles/**/*', 'js/**/*.js'])</code>
+    </pre>
+
+	</div></section>
+
+
+  <section class="slide"><div>
+		<h2>Concepts: Globbing and File lists</h2>
+    <pre>
+      <code>files: ['app/**/*.js', 'vendor/**/*.js']</code>
+    </pre>
+
+    <pre>
+      <code>src: ['app/**/*.js', 'vendor/**/*.js'],</code>
+      <code>dest: 'dest/b.js',</code>
+    </pre>
+    
+    <pre>
+      <code>files: {</code>
+      <code>  'dest/a.js': ['app/**/*.js', 'vendor/**/*.js'],</code>
+      <code>}</code>
+    </pre>
+
+	</div></section>
+  
+  <section class="slide"><div>
+		<h2>Concepts: Read other files</h2>
+
+    <span>Read file contents synchonously</span>
+    <pre>
+      <code>grunt.file.read('foo')</code>
+    </pre>
+
+    <span>Read and parse JSON file</span>
+    <pre>
+      <code>grunt.file.readJSON('foo.json')</code>
+    </pre>
+
+    <pre>
+      <code>password: grunt.file.read('password.txt')</code>
+      <code>pkg: grunt.file.readJSON('package.json')</code>
+    </pre>
+
+	</div></section>
+
+  <section class="slide"><div>
+		<h2>Concepts: Templates</h2>
+
+    <span>Grunt expands text passed in using underscore templates.</span>
+
+    <pre>
+      <code>pkg: grunt.file.readJSON('package.json'),</code>
+      <code>config: {</code>
+      <code>  outputPath: 'foo/bar',</code>
+      <code>}, <mark class="comment">/* ... */</mark></code>
+      <code>copy: {</code>
+      <code>  dst: '<%= config.outputPath %>/app_<%= pkg.version %>.js'</code>
+      <code>}</code>
+    </pre>
+
+	</div></section>
+
+  <section class="slide shout"><div>
+    <h2>Grunt Example<br> Project</h2>
+	</div></section>
+
+  <section class="slide"><div>
+		<h2>So many more tasks</h2>
+
+    <h3>Examples:</h3>
+    <ul>
+      <li>Require.js build</li>
+      <li>Coffeescript compilation</li>
+      <li>Upload to S3</li>
+      <li>Browserify / Bower / Component</li>
+    </ul>
+
+    <p>Building a spec for shared tasks between other node build <br> tools: <a href="https://github.com/node-task/spec">node-task</a></p>
+
+	</div></section>
+
+	<section class="slide" id="details"><div>
+    <h2>Jeremy Morrell</h2>
+    <img src="pictures/jeremy.jpg" alt="profile picture" />
+		<ul>
+			<li><a href="http://twitter.com/jeremymorrell">twitter.com/jeremymorrell</a></li>
+			<li><a href="https://github.com/jmorrell">github.com/jmorrell</a></li>
+			<li><a href="mailto:morrell.jeremy@gmail.com">morrell.jeremy@gmail.com</a></li>
+		</ul>
+	</div></section>
+
+	<script src="shower/shower.min.js"></script>
+</body>
+</html>
